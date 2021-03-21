@@ -32,7 +32,7 @@ $color-codes: (
 
 @mixin setChangedBackgroundColors($color) {
 
-  $delta : 10%;
+  $delta: 10%;
 
   .color-area-left {
     background-color: color.adjust($color, $lightness: -$delta);
