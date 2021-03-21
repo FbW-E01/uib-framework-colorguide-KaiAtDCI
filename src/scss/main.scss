@@ -1,3 +1,60 @@
-// This is where you can import other stylesheets or write your scss code
+@use "sass:color";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+$color-codes: (
+  "1" : #ffc83f,
+  "2" : #fa5e5b,
+  "3" : #1d508d,
+  "4" : #684e79,
+);
+
+.color-item {
+  .color-area {
+    height: 5em;
+  }
+}
+
+.color-area-left {
+  width: 33%;
+}
+.color-area-center {
+  flex-grow: 1;
+}
+.color-area-right {
+  width: 33%;
+}
+
+@mixin setBasicBackgroundColor($color) {
+  .color-area {
+    background-color: $color;
+  }
+}
+
+@mixin setChangedBackgroundColors($color) {
+
+  $delta : 10%;
+
+  .color-area-left {
+    background-color: color.adjust($color, $lightness: -$delta);
+  }
+  .color-area-center {
+    background-color: $color;
+  }
+  .color-area-right {
+    background-color: color.adjust($color, $lightness: $delta);
+  }
+}
+
+.basic-colors {
+  :nth-child(1) { @include setBasicBackgroundColor(map-get($color-codes, "1")); }
+  :nth-child(2) { @include setBasicBackgroundColor(map-get($color-codes, "2")); }
+  :nth-child(3) { @include setBasicBackgroundColor(map-get($color-codes, "3")); }
+  :nth-child(4) { @include setBasicBackgroundColor(map-get($color-codes, "4")); }
+}
+
+.changed-colors {
+  :nth-child(1) { @include setChangedBackgroundColors(map-get($color-codes, "1")); }
+  :nth-child(2) { @include setChangedBackgroundColors(map-get($color-codes, "2")); }
+  :nth-child(3) { @include setChangedBackgroundColors(map-get($color-codes, "3")); }
+  :nth-child(4) { @include setChangedBackgroundColors(map-get($color-codes, "4")); }
+}
